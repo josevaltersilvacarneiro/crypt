@@ -22,6 +22,48 @@
 #
 # Copyright: GPLv3
 
+function crypt()
+{
+	if [ -s "$backup" ]
+	then
+		if [ -d "$filename" ]
+		then
+			change_IFS
+			for file in $(find "$filename" -mindepth 2 -type f)
+			do
+				if [ is_file_stored "$file" -eq 1]
+				then
+					crypt_file "$file"
+				fi
+			done
+			retriev_IFS
+		elif [ -f "$filename" ]
+		then
+			if [ is_file_stored "$filename" -eq 1]
+			then
+				crypt_file "$file"
+			fi
+		else
+			file_doenst_exist
+		fi
+	else
+		if [ -d "$filename" ]
+		then
+			change_IFS
+			for file in $(find "$filename" -mindepth 2 -type f)
+			do
+				crypt_file "$file"
+			done
+			retriev_IFS
+		elif [ -f "$filename" ]
+		then
+			crypt_file "$filename"
+		else
+			file_doenst_exist
+		fi
+	fi
+}
+
 function main()
 {
 	while getoppts :cderh opt
