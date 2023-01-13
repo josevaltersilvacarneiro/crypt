@@ -26,10 +26,10 @@ function crypt()
 {
 	if [ -s "$backup" ]
 	then
-		if [ -d "$filename" ]
+		if [ -d "$FILENAME" ]
 		then
 			change_IFS
-			for file in $(find "$filename" -mindepth 2 -type f)
+			for file in $(find "$FILENAME" -mindepth 2 -type f)
 			do
 				if [ is_file_stored "$file" -eq 1]
 				then
@@ -37,9 +37,9 @@ function crypt()
 				fi
 			done
 			retriev_IFS
-		elif [ -f "$filename" ]
+		elif [ -f "$FILENAME" ]
 		then
-			if [ is_file_stored "$filename" -eq 1]
+			if [ is_file_stored "$FILENAME" -eq 1]
 			then
 				crypt_file "$file"
 			fi
@@ -47,17 +47,17 @@ function crypt()
 			file_doenst_exist
 		fi
 	else
-		if [ -d "$filename" ]
+		if [ -d "$FILENAME" ]
 		then
 			change_IFS
-			for file in $(find "$filename" -mindepth 2 -type f)
+			for file in $(find "$FILENAME" -mindepth 2 -type f)
 			do
 				crypt_file "$file"
 			done
 			retriev_IFS
-		elif [ -f "$filename" ]
+		elif [ -f "$FILENAME" ]
 		then
-			crypt_file "$filename"
+			crypt_file "$FILENAME"
 		else
 			file_doenst_exist
 		fi
@@ -68,7 +68,7 @@ function decrypt()
 {
 	if [ -s "$backup" ]
 	then
-		if [ -d "$filename" ]
+		if [ -d "$FILENAME" ]
 		then
 			change_IFS
 			for file in $()
@@ -78,9 +78,9 @@ function decrypt()
 					decrypt_file "$file"
 				fi
 			done
-		elif [ -f "$filename" ]
+		elif [ -f "$FILENAME" ]
 		then
-				if [ is_file_intact "$filename" -eq 1]
+				if [ is_file_intact "$FILENAME" -eq 1]
 				then
 					decrypt_file "$file"
 				fi
@@ -107,6 +107,17 @@ function delete()
 			sed -i "${i}d" "$backup"
 		fi
 	done < $backup
+}
+
+function show_duplicate_files()
+{
+	change_IFS
+	for file in `sort "$backup" | uniq -d -w 128`
+	do
+		filnam=${file:130}
+		echo "The file $filnam are repeated"
+	done
+	retriev_IFS
 }
 
 function main()
