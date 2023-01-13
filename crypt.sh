@@ -92,6 +92,23 @@ function decrypt()
 	fi
 }
 
+function delete()
+{
+	i=0
+	while read line
+	do
+		let i++
+
+		file=${line##* }
+
+		if [ ! -e "$file" ]
+		then
+			echo "The file `$file` will be deleted of `$backup` because it doens't exist"
+			sed -i "${i}d" "$backup"
+		fi
+	done < $backup
+}
+
 function main()
 {
 	while getoppts :cderh opt
