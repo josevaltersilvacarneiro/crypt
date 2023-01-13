@@ -64,6 +64,34 @@ function crypt()
 	fi
 }
 
+function decrypt()
+{
+	if [ -s "$backup" ]
+	then
+		if [ -d "$filename" ]
+		then
+			change_IFS
+			for file in $()
+			do
+				if [ is_file_intact "$file" -eq 1]
+				then
+					decrypt_file "$file"
+				fi
+			done
+		elif [ -f "$filename" ]
+		then
+				if [ is_file_intact "$filename" -eq 1]
+				then
+					decrypt_file "$file"
+				fi
+		else
+			file_doenst_exist
+		fi
+	else
+			echo "Could not decrypt any file because the file `$backup` doens't exist"
+	fi
+}
+
 function main()
 {
 	while getoppts :cderh opt
