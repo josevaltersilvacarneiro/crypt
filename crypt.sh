@@ -120,6 +120,11 @@ function show_duplicate_files()
 	retriev_IFS
 }
 
+function support()
+{
+	echo "Type crypt.sh -[c, d, e, r, h[ path"
+}
+
 function main()
 {
 	while getoppts :cderh opt
