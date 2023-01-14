@@ -127,6 +127,11 @@ function support()
 
 function main()
 {
+	# It verifies the pattern and delete the others    #
+	# files that aren't in the pattern <hash512  file> #
+
+	sed -i -r '/^[a-z0-9]{128}  .+$/!d' "$backup"
+
 	while getoppts :cderh opt
 	do
 		case $opt in
