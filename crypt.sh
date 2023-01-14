@@ -127,6 +127,8 @@ function support()
 
 function main()
 {
+	OLD_IFS=$IFS
+
 	# FILENAME receives the name of the file or direc- #
 	# tory that should be encrypted. First the eval    #
 	# command replaces the number of parameters passed #
