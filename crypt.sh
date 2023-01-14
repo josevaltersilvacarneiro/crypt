@@ -156,3 +156,5 @@ function main()
 		esac
 	done
 }
+
+main
