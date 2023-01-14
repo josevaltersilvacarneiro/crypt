@@ -136,11 +136,9 @@ function main()
 	do
 		case $opt in
 			c)
-				echo "Crypting"
 				crypt
 				;;
 			d)
-				echo "Decrypting"
 				decrypt
 				;;
 			e)
