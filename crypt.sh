@@ -88,7 +88,7 @@ function decrypt()
 			file_doenst_exist
 		fi
 	else
-			echo "Could not decrypt any file because the file `$backup` doens't exist"
+			echo "Could not decrypt any file because the file $backup doens't exist"
 	fi
 }
 
@@ -103,7 +103,7 @@ function delete()
 
 		if [ ! -e "$file" ]
 		then
-			echo "The file `$file` will be deleted of `$backup` because it doens't exist"
+			echo "The file $file will be deleted of $backup because it doens't exist"
 			sed -i "${i}d" "$backup"
 		fi
 	done < $backup
