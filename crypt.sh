@@ -152,7 +152,7 @@ function main()
 	done
 
 	# It verifies the pattern and delete the others    #
-	# files that aren't in the pattern hash512 file    #
+	# files that aren't in the pattern                 #
 
 	sed -i -r '/^[a-z0-9]{128}  .+$/!d' "$BACKUP"
 
