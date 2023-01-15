@@ -137,12 +137,9 @@ function main()
 
 	FILENAME=`eval tr -s '/' \<\<\< \"\$\{$#\}\"`
 
-	if [ -d "$FILENAME" ]
+	if [ -e "$FILENAME" ]
 	then
-		BACKUP="$FILENAME/.backup.sha512sum"
-	elif [ -f "$FILENAME"]
-	then
-		BACKUP="`dirname $FILENAME`/.backup.sha512sum"
+		BACKUP="${FILENAME%/*}/.backup.sha512sum"
 	else
 		file_doenst_exist "$FILENAME"
 		exit 1
