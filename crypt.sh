@@ -145,6 +145,12 @@ function main()
 		exit 1
 	fi
 
+	while true
+	do
+		PASSWORD=$(zenity --entry --title "Entry of the password" --text "Enter a password")
+		[[ -n "$PASSWORD" ]] && break
+	done
+
 	# It verifies the pattern and delete the others    #
 	# files that aren't in the pattern hash512 file    #
 
