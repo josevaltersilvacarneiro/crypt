@@ -39,6 +39,14 @@ function is_file_stored()
 	return 1
 }
 
+function crypt_file()
+{
+	backup="$1"
+	file="$2"
+
+	echo "$1\t$2"
+}
+
 function crypt()
 {
 	backup="$1"
