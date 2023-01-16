@@ -162,7 +162,7 @@ function main()
 	# It verifies the pattern and delete the others    #
 	# files that aren't in the pattern                 #
 
-	sed -i -r '/^[a-z0-9]{128}  .+$/!d' "$BACKUP"
+	[ -s "$BACKUP" ] && sed -i -r '/^[a-z0-9]{128}  .+$/!d' "$BACKUP"
 
 	while getopts :cderh opt
 	do
