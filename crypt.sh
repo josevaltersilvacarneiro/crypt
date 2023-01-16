@@ -36,43 +36,28 @@ function retriev_IFS()
 
 function crypt()
 {
-	if [ -s "$backup" ]
+	backup="$1"
+	filename="$2"
+
+	if [ -d "$filename" ]
 	then
-		if [ -d "$FILENAME" ]
-		then
-			change_IFS
-			for file in $(find "$FILENAME" -mindepth 2 -type f)
-			do
-				if [ is_file_stored "$file" -eq 1]
-				then
-					crypt_file "$file"
-				fi
-			done
-			retriev_IFS
-		elif [ -f "$FILENAME" ]
-		then
-			if [ is_file_stored "$FILENAME" -eq 1]
+		change_IFS
+		for file in $(find "$filename" -mindepth 2 -type f)
+		do
+			if [ is_file_stored "$file" -ne 1]
 			then
-				crypt_file "$file"
+				crypt_file "$backup" "$file"
 			fi
-		else
-			file_doenst_exist
+		done
+		retriev_IFS
+	elif [ -f "$filename" ]
+	then
+		if [ is_file_stored "$filename" -ne 1]
+		then
+			crypt_file "$backup" "$filename"
 		fi
 	else
-		if [ -d "$FILENAME" ]
-		then
-			change_IFS
-			for file in $(find "$FILENAME" -mindepth 2 -type f)
-			do
-				crypt_file "$file"
-			done
-			retriev_IFS
-		elif [ -f "$FILENAME" ]
-		then
-			crypt_file "$FILENAME"
-		else
-			file_doenst_exist
-		fi
+		file_doenst_exist "$filename"
 	fi
 }
 
