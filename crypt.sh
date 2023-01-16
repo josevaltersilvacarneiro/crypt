@@ -24,6 +24,16 @@
 
 OLD_IFS=$IFS
 
+function change_IFS()
+{
+	IFS=$(echo -ne "\n\b")
+}
+
+function retriev_IFS()
+{
+	IFS=$OLD_IFS
+}
+
 function crypt()
 {
 	if [ -s "$backup" ]
