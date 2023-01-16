@@ -57,7 +57,7 @@ function crypt()
 		change_IFS
 		for file in $(find "$filename" -mindepth 2 -type f)
 		do
-			if [ is_file_stored "$file" -ne 0]
+			if [ is_file_stored "$file" -ne 0 ]
 			then
 				crypt_file "$backup" "$file"
 			fi
