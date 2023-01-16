@@ -168,7 +168,7 @@ function main()
 	do
 		case $opt in
 			c)
-				crypt
+				crypt "$BACKUP" "$FILENAME"
 				;;
 			d)
 				decrypt
