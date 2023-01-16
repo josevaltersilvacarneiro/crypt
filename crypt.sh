@@ -164,7 +164,7 @@ function main()
 
 	sed -i -r '/^[a-z0-9]{128}  .+$/!d' "$BACKUP"
 
-	while getoppts :cderh opt
+	while getopts :cderh opt
 	do
 		case $opt in
 			c)
