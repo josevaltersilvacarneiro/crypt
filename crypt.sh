@@ -36,7 +36,7 @@ function retriev_IFS()
 
 function is_file_stored()
 {
-	return 1
+	return 0
 }
 
 function crypt_file()
@@ -44,7 +44,7 @@ function crypt_file()
 	backup="$1"
 	file="$2"
 
-	echo "$1\t$2"
+	echo -e "$1\t$2"
 }
 
 function crypt()
@@ -57,10 +57,7 @@ function crypt()
 		change_IFS
 		for file in $(find "$filename" -mindepth 2 -type f)
 		do
-			if [ is_file_stored "$file" -ne 0 ]
-			then
-				crypt_file "$backup" "$file"
-			fi
+			is_file_stored "$file" && crypt_file "$backup" "$file"
 		done
 		retriev_IFS
 	elif [ -f "$filename" ]
