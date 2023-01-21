@@ -34,9 +34,13 @@ function retriev_IFS()
 	IFS=$OLD_IFS
 }
 
-function is_file_stored()
+function is_file_encrypted()
 {
-	return 0
+	file="$1"
+
+	[ "$file" != "${file%*.gpg}" ]
+
+	return $?
 }
 
 function crypt_file()
@@ -57,14 +61,14 @@ function crypt()
 		change_IFS
 		for file in $(find "$filename" -mindepth 2 -type f)
 		do
-			is_file_stored "$file" && crypt_file "$backup" "$file"
+			is_file_encrypted "$file" || crypt_file "$backup" "$file"
 		done
 		retriev_IFS
 	elif [ -f "$filename" ]
 	then
 		if [ is_file_stored "$filename" -ne 0]
 		then
-			crypt_file "$backup" "$filename"
+			is_file_encrypted "$file" || crypt_file "$backup" "$file"
 		fi
 	else
 		file_doenst_exist "$filename"
