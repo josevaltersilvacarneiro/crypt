@@ -66,10 +66,7 @@ function crypt()
 		retriev_IFS
 	elif [ -f "$filename" ]
 	then
-		if [ is_file_stored "$filename" -ne 0]
-		then
-			is_file_encrypted "$file" || crypt_file "$backup" "$file"
-		fi
+		is_file_encrypted "$filename" || crypt_file "$backup" "$filename"
 	else
 		file_doenst_exist "$filename"
 	fi
