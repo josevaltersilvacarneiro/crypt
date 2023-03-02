@@ -74,29 +74,22 @@ function crypt()
 
 function decrypt()
 {
-	if [ -s "$backup" ]
+	backup="$1"
+	filename="$2"
+
+	if [ -d "$filename" ]
 	then
-		if [ -d "$FILENAME" ]
-		then
-			change_IFS
-			for file in $()
-			do
-				if [ is_file_intact "$file" -eq 1]
-				then
-					decrypt_file "$file"
-				fi
-			done
-		elif [ -f "$FILENAME" ]
-		then
-				if [ is_file_intact "$FILENAME" -eq 1]
-				then
-					decrypt_file "$file"
-				fi
-		else
-			file_doenst_exist
-		fi
+		change_IFS
+		for file in $(find "$filename" -mindepth 2 -type f)
+		do
+			is_file_encrypted "$file" && decrypt_file "$backup" "$file"
+		done
+		retriev_IFS
+	elif [ -f "$filename" ]
+	then
+		is_file_encrypted "$filename" && crypt_file "$backup" "$filename"
 	else
-			echo "Could not decrypt any file because the file $backup doens't exist"
+		file_doenst_exist "$filename"
 	fi
 }
 
