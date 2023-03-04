@@ -162,10 +162,10 @@ function main()
 				crypt "$BACKUP" "$FILENAME"
 				;;
 			d)
-				decrypt
+				decrypt "$BACKUP" "$FILENAME"
 				;;
 			e)
-				delete
+				delete "$BACKUP"
 				;;
 			r)
 				repeat
