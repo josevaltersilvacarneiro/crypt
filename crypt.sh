@@ -168,7 +168,7 @@ function main()
 				delete "$BACKUP"
 				;;
 			r)
-				repeat
+				show_duplicate_files "$BACKUP"
 				;;
 			h)
 				support
