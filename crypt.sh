@@ -112,6 +112,8 @@ function delete()
 
 function show_duplicate_files()
 {
+	backup="$1"
+
 	change_IFS
 	for file in `sort "$backup" | uniq -d -w 128`
 	do
